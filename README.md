@@ -17,7 +17,7 @@ About the Script:-
 The script has a thread group named  "Assessment", within this threadgroup we have two Transaction Controller.
 1) ${__threadGroupName}_00_CategoryID_API_E2E (Enabled) and
    
-2) ${__threadGroupName}_00_CategoryID_${p_Category_ID}_API_E2E_Debug (Disabled)
+2) ${__threadGroupName}___00_CategoryID__${p_Category_ID}_API_E2E_Debug (Disabled)
    
 The debug transaction was created to identiy the failing Categorty ID's.
 
