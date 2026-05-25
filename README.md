@@ -33,8 +33,11 @@ PS:-
 3) The test has been configured to meet all the criteria listed below
    
    NFR-01	Test should support Vusers (Threads) half the count of Category IDs shared in Test Data
+   
    NFR-02	The test should ramp up at one VUser (Thread) per second
+   
    NFR-03	Test should achieve 10 API calls in total for the 1-minute Steady State duration
+   
    NFR-04	90 percent of the times the API is expected to perform within 500 ms
 
 5) The script meets all the functional requirements as stated below
