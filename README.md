@@ -9,7 +9,7 @@ Contents of the Repository
 7) HTML Report
 8) Test Results Summary
 
-******************************************Start:Instructions to Execute the Script******************************************
+##Start:Instructions to Execute the Script
 1) Script Name:- Asurity_Assessment.jmx
 2) Data File Name:- p_Category_ID.csv
 
