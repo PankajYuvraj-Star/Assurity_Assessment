@@ -1,0 +1,628 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmeterTestPlan version="1.2" properties="5.0" jmeter="5.6.3">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Assurity_Assessment">
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
+        <collectionProp name="Arguments.arguments"/>
+      </elementProp>
+    </TestPlan>
+    <hashTree>
+      <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="Dynamic User Defined Variables - To pass argumets using the command line while executing in the non gui mode">
+        <collectionProp name="Arguments.arguments">
+          <elementProp name="host" elementType="Argument">
+            <stringProp name="Argument.name">host</stringProp>
+            <stringProp name="Argument.value">api.tmsandbox.co.nz</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="scheme" elementType="Argument">
+            <stringProp name="Argument.name">scheme</stringProp>
+            <stringProp name="Argument.value">https</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="p_Threads" elementType="Argument">
+            <stringProp name="Argument.name">p_Threads</stringProp>
+            <stringProp name="Argument.value">${__P(p_Threads,5)}</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+            <stringProp name="Argument.desc">NFR-01-Test should support Vusers (Threads) half the count of Category IDs shared in Test Data</stringProp>
+          </elementProp>
+          <elementProp name="p_RampUp" elementType="Argument">
+            <stringProp name="Argument.name">p_RampUp</stringProp>
+            <stringProp name="Argument.value">${__P(p_RampUp,5)}</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+            <stringProp name="Argument.desc">NFR-02-The test should ramp up at one VUser (Thread) per second</stringProp>
+          </elementProp>
+          <elementProp name="p_LoopCount" elementType="Argument">
+            <stringProp name="Argument.name">p_LoopCount</stringProp>
+            <stringProp name="Argument.value">${__P(p_LoopCount,2)}</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="p_Duration" elementType="Argument">
+            <stringProp name="Argument.name">p_Duration</stringProp>
+            <stringProp name="Argument.value">${__P(p_Duration,60)}</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+            <stringProp name="Argument.desc">NFR-03-Test should achieve 10 API calls in total for the 1-minute Steady State duration</stringProp>
+          </elementProp>
+          <elementProp name="p_StartUpDelay" elementType="Argument">
+            <stringProp name="Argument.name">p_StartUpDelay</stringProp>
+            <stringProp name="Argument.value">${__P(p_StartUpDelay,0)}</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="p_TargetThroughput" elementType="Argument">
+            <stringProp name="Argument.name">p_TargetThroughput</stringProp>
+            <stringProp name="Argument.value">${__P(p_TargetThroughput,10)}</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+            <stringProp name="Argument.desc">NFR-03-Test should achieve 10 API calls in total for the 1-minute Steady State duration</stringProp>
+          </elementProp>
+          <elementProp name="p_CategoryID_CSV_Path" elementType="Argument">
+            <stringProp name="Argument.name">p_CategoryID_CSV_Path</stringProp>
+            <stringProp name="Argument.value">C:/{PathtotheCSVFile}</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+            <stringProp name="Argument.desc">Update the path to the CSV file for Category  the path format is &quot;/&quot;</stringProp>
+          </elementProp>
+          <elementProp name="p_CategoryID_Random_CSV_Path" elementType="Argument">
+            <stringProp name="Argument.name">p_CategoryID_Random_CSV_Path</stringProp>
+            <stringProp name="Argument.value">C:\{PathtotheCSVFile}</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+            <stringProp name="Argument.desc">Update the path to the CSV file for Randon Category ID the path format is different &quot;\&quot;</stringProp>
+          </elementProp>
+          <elementProp name="p_OutputFile_Path" elementType="Argument">
+            <stringProp name="Argument.name">p_OutputFile_Path</stringProp>
+            <stringProp name="Argument.value">C:/{PathForOutputfile}</stringProp>
+            <stringProp name="Argument.desc">Update the path to save the output file the path format is &quot;/&quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+        </collectionProp>
+        <stringProp name="TestPlan.comments">If no values are passed during run time the script will default to predefined values which will ahieve the desired throughput for this assessment- This approach reusability, easy to use in the pipelines.</stringProp>
+      </Arguments>
+      <hashTree/>
+      <ConfigTestElement guiclass="HttpDefaultsGui" testclass="ConfigTestElement" testname="HTTP Request Defaults" enabled="true">
+        <stringProp name="HTTPSampler.domain">${host}</stringProp>
+        <stringProp name="HTTPSampler.protocol">${scheme}</stringProp>
+        <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
+          <collectionProp name="Arguments.arguments"/>
+        </elementProp>
+        <stringProp name="HTTPSampler.implementation"></stringProp>
+      </ConfigTestElement>
+      <hashTree/>
+      <CookieManager guiclass="CookiePanel" testclass="CookieManager" testname="HTTP Cookie Manager" enabled="true">
+        <collectionProp name="CookieManager.cookies"/>
+        <boolProp name="CookieManager.clearEachIteration">false</boolProp>
+        <boolProp name="CookieManager.controlledByThreadGroup">false</boolProp>
+      </CookieManager>
+      <hashTree/>
+      <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config" enabled="false">
+        <stringProp name="delimiter">,</stringProp>
+        <stringProp name="fileEncoding"></stringProp>
+        <stringProp name="filename">${p_CategoryID_CSV_Path}/p_Category_ID.csv</stringProp>
+        <boolProp name="ignoreFirstLine">true</boolProp>
+        <boolProp name="quotedData">false</boolProp>
+        <boolProp name="recycle">true</boolProp>
+        <stringProp name="shareMode">shareMode.all</stringProp>
+        <boolProp name="stopThread">false</boolProp>
+        <stringProp name="variableNames">p_Category_ID</stringProp>
+        <stringProp name="TestPlan.comments">This CSV file contains the Category Ids - I am using the Random CSV Data set Config and thus have disabled this one.</stringProp>
+      </CSVDataSet>
+      <hashTree/>
+      <com.blazemeter.jmeter.RandomCSVDataSetConfig guiclass="com.blazemeter.jmeter.RandomCSVDataSetConfigGui" testclass="com.blazemeter.jmeter.RandomCSVDataSetConfig" testname="bzm - Random CSV Data Set Config" enabled="true">
+        <stringProp name="filename">${p_CategoryID_Random_CSV_Path}\p_Category_ID.csv</stringProp>
+        <stringProp name="fileEncoding">UTF-8</stringProp>
+        <stringProp name="delimiter">,</stringProp>
+        <stringProp name="variableNames">p_Category_ID</stringProp>
+        <boolProp name="randomOrder">true</boolProp>
+        <boolProp name="ignoreFirstLine">true</boolProp>
+        <boolProp name="rewindOnTheEndOfList">true</boolProp>
+        <boolProp name="independentListPerThread">false</boolProp>
+        <stringProp name="TestPlan.comments">Use this CSV data set config for Randon selection of Category ID</stringProp>
+      </com.blazemeter.jmeter.RandomCSVDataSetConfig>
+      <hashTree/>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Assessment">
+        <stringProp name="TestPlan.comments">This are configured from the User Defined Varibles and can be supplied with values at run time from the command line</stringProp>
+        <stringProp name="ThreadGroup.num_threads">${p_Threads}</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">${p_RampUp}</stringProp>
+        <stringProp name="ThreadGroup.duration">${p_Duration}</stringProp>
+        <stringProp name="ThreadGroup.delay">${p_StartUpDelay}</stringProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+        <boolProp name="ThreadGroup.scheduler">true</boolProp>
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
+          <stringProp name="LoopController.loops">${p_LoopCount}</stringProp>
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+        </elementProp>
+      </ThreadGroup>
+      <hashTree>
+        <ConstantThroughputTimer guiclass="TestBeanGUI" testclass="ConstantThroughputTimer" testname="Constant Throughput Timer" enabled="true">
+          <intProp name="calcMode">0</intProp>
+          <stringProp name="throughput">${p_TargetThroughput}</stringProp>
+          <stringProp name="TestPlan.comments">This is used to achieve the target throughput rate of 10 API Calls - NFR03</stringProp>
+        </ConstantThroughputTimer>
+        <hashTree/>
+        <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="${__threadGroupName}_00_CategoryID_API_E2E">
+          <boolProp name="TransactionController.parent">true</boolProp>
+          <boolProp name="TransactionController.includeTimers">true</boolProp>
+        </TransactionController>
+        <hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="${__threadGroupName}_00_CategoryID_API">
+            <stringProp name="HTTPSampler.domain">${host}</stringProp>
+            <stringProp name="HTTPSampler.protocol">${scheme}</stringProp>
+            <stringProp name="HTTPSampler.path">/v1/Categories/${p_Category_ID}/Details.json?catalogue=false</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <stringProp name="HTTPSampler.method">GET</stringProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
+              <collectionProp name="Arguments.arguments"/>
+            </elementProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+              <collectionProp name="HeaderManager.headers">
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">authority</stringProp>
+                  <stringProp name="Header.value">${host}</stringProp>
+                </elementProp>
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">method</stringProp>
+                  <stringProp name="Header.value">GET</stringProp>
+                </elementProp>
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">path</stringProp>
+                  <stringProp name="Header.value">/v1/Categories/${p_Category_ID}/Details.json?catalogue=false</stringProp>
+                </elementProp>
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">scheme</stringProp>
+                  <stringProp name="Header.value">${scheme}</stringProp>
+                </elementProp>
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">Accept</stringProp>
+                  <stringProp name="Header.value">text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7</stringProp>
+                </elementProp>
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">Accept-encoding</stringProp>
+                  <stringProp name="Header.value">gzip, deflate, br, zstd</stringProp>
+                </elementProp>
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">Accept-language</stringProp>
+                  <stringProp name="Header.value">en-US,en;q=0.9</stringProp>
+                </elementProp>
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">If-none-match</stringProp>
+                  <stringProp name="Header.value">&quot;ZImPuWLR4mmju8gioveTDAKDNTQ=&quot;</stringProp>
+                </elementProp>
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">Priority</stringProp>
+                  <stringProp name="Header.value">u=0, i</stringProp>
+                </elementProp>
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">Sec-ch-ua</stringProp>
+                  <stringProp name="Header.value">&quot;Chromium&quot;;v=&quot;148&quot;, &quot;Google Chrome&quot;;v=&quot;148&quot;, &quot;Not/A)Brand&quot;;v=&quot;99&quot;</stringProp>
+                </elementProp>
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">Sec-ch-ua-mobile</stringProp>
+                  <stringProp name="Header.value">?0</stringProp>
+                </elementProp>
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">Sec-ch-ua-platform</stringProp>
+                  <stringProp name="Header.value">&quot;Windows&quot;</stringProp>
+                </elementProp>
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">Sec-fetch-dest</stringProp>
+                  <stringProp name="Header.value">document</stringProp>
+                </elementProp>
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">Sec-fetch-mode</stringProp>
+                  <stringProp name="Header.value">navigate</stringProp>
+                </elementProp>
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">Sec-fetch-site</stringProp>
+                  <stringProp name="Header.value">none</stringProp>
+                </elementProp>
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">Sec-fetch-user</stringProp>
+                  <stringProp name="Header.value">?1</stringProp>
+                </elementProp>
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">Upgrade-insecure-requests</stringProp>
+                  <stringProp name="Header.value">1</stringProp>
+                </elementProp>
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">User-agent</stringProp>
+                  <stringProp name="Header.value">Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36</stringProp>
+                </elementProp>
+              </collectionProp>
+            </HeaderManager>
+            <hashTree/>
+            <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
+              <collectionProp name="Asserion.test_strings">
+                <stringProp name="49586">200</stringProp>
+              </collectionProp>
+              <stringProp name="Assertion.custom_message"></stringProp>
+              <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+              <boolProp name="Assertion.assume_success">false</boolProp>
+              <intProp name="Assertion.test_type">2</intProp>
+              <stringProp name="Assertion.scope">all</stringProp>
+            </ResponseAssertion>
+            <hashTree/>
+            <JMESPathAssertion guiclass="JMESPathAssertionGui" testclass="JMESPathAssertion" testname="JSON_JMESPath_Assertion_CategoryId" enabled="true">
+              <stringProp name="JMES_PATH">CategoryId</stringProp>
+              <stringProp name="EXPECTED_VALUE">${p_Category_ID}</stringProp>
+              <boolProp name="JSONVALIDATION">true</boolProp>
+              <boolProp name="EXPECT_NULL">false</boolProp>
+              <boolProp name="INVERT">false</boolProp>
+              <boolProp name="ISREGEX">true</boolProp>
+              <stringProp name="TestPlan.comments">This assertion will compare the value of p_Category_ID with the CategoryId in the response, if the response matches this assertion will pass</stringProp>
+            </JMESPathAssertion>
+            <hashTree/>
+            <JMESPathAssertion guiclass="JMESPathAssertionGui" testclass="JMESPathAssertion" testname="JSON_JMESPath_Assertion_CanRelist" enabled="true">
+              <stringProp name="JMES_PATH">CanRelist</stringProp>
+              <stringProp name="EXPECTED_VALUE">true</stringProp>
+              <boolProp name="JSONVALIDATION">true</boolProp>
+              <boolProp name="EXPECT_NULL">false</boolProp>
+              <boolProp name="INVERT">false</boolProp>
+              <boolProp name="ISREGEX">true</boolProp>
+              <stringProp name="TestPlan.comments">This assertion will compare the value of CanRelist with the expected response as &quot;true&quot;, if the response matches this assertion will pass</stringProp>
+            </JMESPathAssertion>
+            <hashTree/>
+            <JMESPathExtractor guiclass="JMESPathExtractorGui" testclass="JMESPathExtractor" testname="JSON JMESPath Extractor-c_Category" enabled="true">
+              <stringProp name="JMESExtractor.referenceName">c_CategoryId</stringProp>
+              <stringProp name="JMESExtractor.jmesPathExpr">CategoryId</stringProp>
+              <stringProp name="JMESExtractor.matchNumber">0</stringProp>
+              <stringProp name="JMESExtractor.defaultValue">NOT_FOUND</stringProp>
+              <stringProp name="TestPlan.comments">Capturing the value of Category ID to write it to the file</stringProp>
+            </JMESPathExtractor>
+            <hashTree/>
+            <JMESPathExtractor guiclass="JMESPathExtractorGui" testclass="JMESPathExtractor" testname="JSON JMESPath Extractor-c_Name" enabled="true">
+              <stringProp name="JMESExtractor.referenceName">c_Name</stringProp>
+              <stringProp name="JMESExtractor.jmesPathExpr">Name</stringProp>
+              <stringProp name="JMESExtractor.matchNumber">0</stringProp>
+              <stringProp name="JMESExtractor.defaultValue">NOT_FOUND</stringProp>
+              <stringProp name="TestPlan.comments">Capturing the value of Name to write it to the file</stringProp>
+            </JMESPathExtractor>
+            <hashTree/>
+            <JMESPathExtractor guiclass="JMESPathExtractorGui" testclass="JMESPathExtractor" testname="JSON JMESPath Extractor-c_Path" enabled="true">
+              <stringProp name="JMESExtractor.referenceName">c_Path</stringProp>
+              <stringProp name="JMESExtractor.jmesPathExpr">Path</stringProp>
+              <stringProp name="JMESExtractor.matchNumber">0</stringProp>
+              <stringProp name="JMESExtractor.defaultValue">NOT_FOUND</stringProp>
+              <stringProp name="TestPlan.comments">Capturing the value of Path to write it to the file</stringProp>
+            </JMESPathExtractor>
+            <hashTree/>
+            <JMESPathExtractor guiclass="JMESPathExtractorGui" testclass="JMESPathExtractor" testname="JSON JMESPath Extractor-c_Promotions_Id" enabled="true">
+              <stringProp name="JMESExtractor.referenceName">c_Promotions_Id</stringProp>
+              <stringProp name="JMESExtractor.jmesPathExpr">Promotions[*].Id</stringProp>
+              <stringProp name="JMESExtractor.matchNumber">-1</stringProp>
+              <stringProp name="JMESExtractor.defaultValue">NOT_FOUND</stringProp>
+              <stringProp name="TestPlan.comments">Capturing all the values of Promotion ID to write it to the file</stringProp>
+            </JMESPathExtractor>
+            <hashTree/>
+            <JMESPathExtractor guiclass="JMESPathExtractorGui" testclass="JMESPathExtractor" testname="JSON JMESPath Extractor-c_Promotions_Price" enabled="true">
+              <stringProp name="JMESExtractor.referenceName">c_Promotions_Price</stringProp>
+              <stringProp name="JMESExtractor.jmesPathExpr">Promotions[*].Price</stringProp>
+              <stringProp name="JMESExtractor.matchNumber">-1</stringProp>
+              <stringProp name="JMESExtractor.defaultValue">NOT_FOUND</stringProp>
+              <stringProp name="TestPlan.comments">Capturing all the values of Promotion Prices to write it to the file</stringProp>
+            </JMESPathExtractor>
+            <hashTree/>
+            <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="JSR223 PostProcessor" enabled="true">
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="script">// ===== CONFIGURE OUTPUT FILE =====
+
+def outputFile = new File(vars.get(&apos;p_OutputFile_Path&apos;) + &apos;/Categories_Promotions.csv&apos;)
+
+// If file doesn&apos;t exist yet, create parent folders (if needed)and write the CSV header row once.
+if (!outputFile.exists()) {
+    outputFile.parentFile?.mkdirs()
+    outputFile &lt;&lt; &quot;CategoryId,Name,Path,PromotionId,Price\n&quot;
+}
+
+def catId = vars.get(&apos;c_CategoryId&apos;)
+def name = vars.get(&apos;c_Name&apos;)
+def path = vars.get(&apos;c_Path&apos;)
+
+// Number of promotions extracted (c_Promotions_Id_1..N)
+def promoCountStr = vars.get(&apos;c_Promotions_Id_matchNr&apos;)
+if (!promoCountStr) return  // nothing to write
+int promoCount = promoCountStr as int // convert to integer
+
+def esc = { s -&gt;
+    if (s == null) return &quot;&quot;
+    def str = s.toString()   // If value contains comma/quote/newline, wrap in quotes and escape quotes	
+    if (str.contains(&apos;&quot;&apos;) || str.contains(&apos;,&apos;) || str.contains(&apos;\n&apos;)) {
+        &apos;&quot;&apos; + str.replace(&apos;&quot;&apos;, &apos;&quot;&quot;&apos;) + &apos;&quot;&apos;
+    } else {
+        str
+    }
+}
+
+// ===== Writes one line per promotion =====
+for (int i = 1; i &lt;= promoCount; i++) {
+    def promoId = vars.get(&quot;c_Promotions_Id_${i}&quot;)
+    def price   = vars.get(&quot;c_Promotions_Price_${i}&quot;)
+    if (promoId == null || price == null) continue
+
+    def line = [
+        esc(catId),
+        esc(name),
+        esc(path),
+        esc(promoId),
+        esc(price)
+    ].join(&apos;,&apos;)
+
+    outputFile &lt;&lt; line + &quot;\n&quot;
+}</stringProp>
+              <stringProp name="scriptLanguage">groovy</stringProp>
+              <stringProp name="TestPlan.comments">Groovy Code to output the captured value to a file</stringProp>
+            </JSR223PostProcessor>
+            <hashTree/>
+          </hashTree>
+          <DebugSampler guiclass="TestBeanGUI" testclass="DebugSampler" testname="Debug Sampler" enabled="false">
+            <boolProp name="displayJMeterProperties">false</boolProp>
+            <boolProp name="displayJMeterVariables">true</boolProp>
+            <boolProp name="displaySystemProperties">false</boolProp>
+          </DebugSampler>
+          <hashTree/>
+        </hashTree>
+        <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="${__threadGroupName}_00_CategoryID_${p_Category_ID}_API_E2E_Debug" enabled="false">
+          <stringProp name="TestPlan.comments">This threadgroup was created to identify which Category ID was giving error constantly</stringProp>
+          <boolProp name="TransactionController.includeTimers">false</boolProp>
+        </TransactionController>
+        <hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="${__threadGroupName}_00_CategoryID_${p_Category_ID}_API" enabled="true">
+            <stringProp name="TestPlan.comments"> ${scheme} ${host}/${p_Category_ID}/Details.json?catalogue=false</stringProp>
+            <stringProp name="HTTPSampler.domain">${host}</stringProp>
+            <stringProp name="HTTPSampler.protocol">${scheme}</stringProp>
+            <stringProp name="HTTPSampler.path">/v1/Categories/${p_Category_ID}/Details.json?catalogue=false</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <stringProp name="HTTPSampler.method">GET</stringProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
+              <collectionProp name="Arguments.arguments"/>
+            </elementProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+              <collectionProp name="HeaderManager.headers">
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">authority</stringProp>
+                  <stringProp name="Header.value">${host}</stringProp>
+                </elementProp>
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">method</stringProp>
+                  <stringProp name="Header.value">GET</stringProp>
+                </elementProp>
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">path</stringProp>
+                  <stringProp name="Header.value">/v1/Categories/${p_Category_ID}/Details.json?catalogue=false</stringProp>
+                </elementProp>
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">scheme</stringProp>
+                  <stringProp name="Header.value">${scheme}</stringProp>
+                </elementProp>
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">Accept</stringProp>
+                  <stringProp name="Header.value">text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7</stringProp>
+                </elementProp>
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">Accept-encoding</stringProp>
+                  <stringProp name="Header.value">gzip, deflate, br, zstd</stringProp>
+                </elementProp>
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">Accept-language</stringProp>
+                  <stringProp name="Header.value">en-US,en;q=0.9</stringProp>
+                </elementProp>
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">If-none-match</stringProp>
+                  <stringProp name="Header.value">&quot;ZImPuWLR4mmju8gioveTDAKDNTQ=&quot;</stringProp>
+                </elementProp>
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">Priority</stringProp>
+                  <stringProp name="Header.value">u=0, i</stringProp>
+                </elementProp>
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">Sec-ch-ua</stringProp>
+                  <stringProp name="Header.value">&quot;Chromium&quot;;v=&quot;148&quot;, &quot;Google Chrome&quot;;v=&quot;148&quot;, &quot;Not/A)Brand&quot;;v=&quot;99&quot;</stringProp>
+                </elementProp>
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">Sec-ch-ua-mobile</stringProp>
+                  <stringProp name="Header.value">?0</stringProp>
+                </elementProp>
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">Sec-ch-ua-platform</stringProp>
+                  <stringProp name="Header.value">&quot;Windows&quot;</stringProp>
+                </elementProp>
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">Sec-fetch-dest</stringProp>
+                  <stringProp name="Header.value">document</stringProp>
+                </elementProp>
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">Sec-fetch-mode</stringProp>
+                  <stringProp name="Header.value">navigate</stringProp>
+                </elementProp>
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">Sec-fetch-site</stringProp>
+                  <stringProp name="Header.value">none</stringProp>
+                </elementProp>
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">Sec-fetch-user</stringProp>
+                  <stringProp name="Header.value">?1</stringProp>
+                </elementProp>
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">Upgrade-insecure-requests</stringProp>
+                  <stringProp name="Header.value">1</stringProp>
+                </elementProp>
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">User-agent</stringProp>
+                  <stringProp name="Header.value">Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36</stringProp>
+                </elementProp>
+              </collectionProp>
+            </HeaderManager>
+            <hashTree/>
+            <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
+              <collectionProp name="Asserion.test_strings">
+                <stringProp name="49586">200</stringProp>
+              </collectionProp>
+              <stringProp name="Assertion.custom_message"></stringProp>
+              <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+              <boolProp name="Assertion.assume_success">false</boolProp>
+              <intProp name="Assertion.test_type">2</intProp>
+              <stringProp name="Assertion.scope">all</stringProp>
+            </ResponseAssertion>
+            <hashTree/>
+            <JMESPathAssertion guiclass="JMESPathAssertionGui" testclass="JMESPathAssertion" testname="JSON_JMESPath_Assertion_CategoryId" enabled="true">
+              <stringProp name="JMES_PATH">CategoryId</stringProp>
+              <stringProp name="EXPECTED_VALUE">${p_Category_ID}</stringProp>
+              <boolProp name="JSONVALIDATION">true</boolProp>
+              <boolProp name="EXPECT_NULL">false</boolProp>
+              <boolProp name="INVERT">false</boolProp>
+              <boolProp name="ISREGEX">true</boolProp>
+              <stringProp name="TestPlan.comments">This assertion will compare the value of p_Category_ID with the CategoryId in the response, if the response matches this assertion will pass</stringProp>
+            </JMESPathAssertion>
+            <hashTree/>
+            <JMESPathAssertion guiclass="JMESPathAssertionGui" testclass="JMESPathAssertion" testname="JSON_JMESPath_Assertion_CanRelist" enabled="true">
+              <stringProp name="JMES_PATH">CanRelist</stringProp>
+              <stringProp name="EXPECTED_VALUE">true</stringProp>
+              <boolProp name="JSONVALIDATION">true</boolProp>
+              <boolProp name="EXPECT_NULL">false</boolProp>
+              <boolProp name="INVERT">false</boolProp>
+              <boolProp name="ISREGEX">true</boolProp>
+              <stringProp name="TestPlan.comments">This assertion will compare the value of CanRelist with the expected response as &quot;true&quot;, if the response matches this assertion will pass</stringProp>
+            </JMESPathAssertion>
+            <hashTree/>
+            <JMESPathExtractor guiclass="JMESPathExtractorGui" testclass="JMESPathExtractor" testname="JSON JMESPath Extractor-c_Category" enabled="true">
+              <stringProp name="JMESExtractor.referenceName">c_CategoryId</stringProp>
+              <stringProp name="JMESExtractor.jmesPathExpr">CategoryId</stringProp>
+              <stringProp name="JMESExtractor.matchNumber">0</stringProp>
+              <stringProp name="JMESExtractor.defaultValue">NOT_FOUND</stringProp>
+            </JMESPathExtractor>
+            <hashTree/>
+            <JMESPathExtractor guiclass="JMESPathExtractorGui" testclass="JMESPathExtractor" testname="JSON JMESPath Extractor-c_Name" enabled="true">
+              <stringProp name="JMESExtractor.referenceName">c_Name</stringProp>
+              <stringProp name="JMESExtractor.jmesPathExpr">Name</stringProp>
+              <stringProp name="JMESExtractor.matchNumber">0</stringProp>
+              <stringProp name="JMESExtractor.defaultValue">NOT_FOUND</stringProp>
+            </JMESPathExtractor>
+            <hashTree/>
+            <JMESPathExtractor guiclass="JMESPathExtractorGui" testclass="JMESPathExtractor" testname="JSON JMESPath Extractor-c_Path" enabled="true">
+              <stringProp name="JMESExtractor.referenceName">c_Path</stringProp>
+              <stringProp name="JMESExtractor.jmesPathExpr">Path</stringProp>
+              <stringProp name="JMESExtractor.matchNumber">0</stringProp>
+              <stringProp name="JMESExtractor.defaultValue">NOT_FOUND</stringProp>
+            </JMESPathExtractor>
+            <hashTree/>
+            <JMESPathExtractor guiclass="JMESPathExtractorGui" testclass="JMESPathExtractor" testname="JSON JMESPath Extractor-c_Promotions_Id" enabled="true">
+              <stringProp name="JMESExtractor.referenceName">c_Promotions_Id</stringProp>
+              <stringProp name="JMESExtractor.jmesPathExpr">Promotions[*].Id</stringProp>
+              <stringProp name="JMESExtractor.matchNumber">-1</stringProp>
+              <stringProp name="JMESExtractor.defaultValue">NOT_FOUND</stringProp>
+            </JMESPathExtractor>
+            <hashTree/>
+            <JMESPathExtractor guiclass="JMESPathExtractorGui" testclass="JMESPathExtractor" testname="JSON JMESPath Extractor-c_Promotions_Price" enabled="true">
+              <stringProp name="JMESExtractor.referenceName">c_Promotions_Price</stringProp>
+              <stringProp name="JMESExtractor.jmesPathExpr">Promotions[*].Price</stringProp>
+              <stringProp name="JMESExtractor.matchNumber">-1</stringProp>
+              <stringProp name="JMESExtractor.defaultValue">NOT_FOUND</stringProp>
+            </JMESPathExtractor>
+            <hashTree/>
+            <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="JSR223 PostProcessor" enabled="true">
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="script">// ===== CONFIGURE OUTPUT FILE =====
+
+def outputFile = new File(vars.get(&apos;p_OutputFile_Path&apos;) + &apos;/Categories_Promotions.csv&apos;)
+
+// If file doesn&apos;t exist yet, create parent folders (if needed)and write the CSV header row once.
+if (!outputFile.exists()) {
+    outputFile.parentFile?.mkdirs()
+    outputFile &lt;&lt; &quot;CategoryId,Name,Path,PromotionId,Price\n&quot;
+}
+
+def catId = vars.get(&apos;c_CategoryId&apos;)
+def name = vars.get(&apos;c_Name&apos;)
+def path = vars.get(&apos;c_Path&apos;)
+
+// Number of promotions extracted (c_Promotions_Id_1..N)
+def promoCountStr = vars.get(&apos;c_Promotions_Id_matchNr&apos;)
+if (!promoCountStr) return  // nothing to write
+int promoCount = promoCountStr as int // convert to integer
+
+def esc = { s -&gt;
+    if (s == null) return &quot;&quot;
+    def str = s.toString()   // If value contains comma/quote/newline, wrap in quotes and escape quotes	
+    if (str.contains(&apos;&quot;&apos;) || str.contains(&apos;,&apos;) || str.contains(&apos;\n&apos;)) {
+        &apos;&quot;&apos; + str.replace(&apos;&quot;&apos;, &apos;&quot;&quot;&apos;) + &apos;&quot;&apos;
+    } else {
+        str
+    }
+}
+
+// ===== Writes one line per promotion =====
+for (int i = 1; i &lt;= promoCount; i++) {
+    def promoId = vars.get(&quot;c_Promotions_Id_${i}&quot;)
+    def price   = vars.get(&quot;c_Promotions_Price_${i}&quot;)
+    if (promoId == null || price == null) continue
+
+    def line = [
+        esc(catId),
+        esc(name),
+        esc(path),
+        esc(promoId),
+        esc(price)
+    ].join(&apos;,&apos;)
+
+    outputFile &lt;&lt; line + &quot;\n&quot;
+}</stringProp>
+              <stringProp name="scriptLanguage">groovy</stringProp>
+            </JSR223PostProcessor>
+            <hashTree/>
+          </hashTree>
+          <DebugSampler guiclass="TestBeanGUI" testclass="DebugSampler" testname="Debug Sampler" enabled="false">
+            <boolProp name="displayJMeterProperties">false</boolProp>
+            <boolProp name="displayJMeterVariables">true</boolProp>
+            <boolProp name="displaySystemProperties">false</boolProp>
+          </DebugSampler>
+          <hashTree/>
+        </hashTree>
+        <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>true</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+              <sentBytes>true</sentBytes>
+              <url>true</url>
+              <threadCounts>true</threadCounts>
+              <idleTime>true</idleTime>
+              <connectTime>true</connectTime>
+            </value>
+          </objProp>
+          <stringProp name="filename">C:\Users\pankajh\apache-jmeter-5.6.3\Assessment\results.jtl</stringProp>
+        </ResultCollector>
+        <hashTree/>
+      </hashTree>
+    </hashTree>
+  </hashTree>
+</jmeterTestPlan>
