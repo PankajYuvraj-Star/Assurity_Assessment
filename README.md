@@ -31,12 +31,13 @@ PS:-
 2) The script is readable and comments are added to each element within the scripit and should make it easy to make any changes and check why its been done in a particular way
    
 3) The test has been configured to meet all the criteria listed below
+   
    NFR-01	Test should support Vusers (Threads) half the count of Category IDs shared in Test Data
    NFR-02	The test should ramp up at one VUser (Thread) per second
    NFR-03	Test should achieve 10 API calls in total for the 1-minute Steady State duration
    NFR-04	90 percent of the times the API is expected to perform within 500 ms
 
-4) The script meets all the functional requirements as stated below
+5) The script meets all the functional requirements as stated below
    1) Functional Requirements
       API: https://api.tmsandbox.co.nz/v1/Categories/6327/Details.json?catalogue=false 
       Test Data: (Category ID: 6327, 6328, 6329, 6330, 6331, 6332, 6333, 6334, 6335, 6336)
@@ -48,7 +49,7 @@ PS:-
     3) Print following values in a csv file: Category ID, Name, Path, Promotion ID, Price
        Please print all Promotion IDs and respective Prices per Category ID
 
- 5) Working Script Snapshots.docx file contains the proof of execution during the script development
+ 6) Working Script Snapshots.docx file contains the proof of execution during the script development
 
 ******************************************END: Instructions to Execute the Script********************************************
 
